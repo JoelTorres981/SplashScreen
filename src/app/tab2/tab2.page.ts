@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+// CHANGE: Import the PhotoService
+import { PhotoService } from '../services/photo.service';
 
 @Component({
   selector: 'app-tab2',
@@ -7,7 +9,16 @@ import { Component } from '@angular/core';
   standalone: false,
 })
 export class Tab2Page {
+  // CHANGE: Update constructor to include `photoService`
+  constructor(public photoService: PhotoService) {}
 
-  constructor() {}
+  // CHANGE: Add call to `loadSaved()` when navigating to the Photos tab
+  async ngOnInit() {
+    await this.photoService.loadSaved();
+  }
 
+  // CHANGE: Add `addNewToGallery()` method
+  addPhotoToGallery() {
+    this.photoService.addNewToGallery();
+  }
 }
